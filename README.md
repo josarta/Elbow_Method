@@ -1,9 +1,3 @@
-¡Claro que sí, **josarta**! Este proyecto de **compresión y cuantificación de colores en imágenes utilizando K-Medias** es una aplicación fantástica y muy visual para tu portafolio. 
-
-Aquí tienes el archivo **`README.md` completado de forma profesional**. He continuado exactamente desde donde te quedaste, estructurando la explicación matemática del "codo", agregando el código de Python necesario para procesar la imagen con `scikit-learn` y finalizando con una guía clara de cómo ejecutar el proyecto y analizar los resultados.
-
-Puedes copiar este bloque completo de Markdown para actualizar tu repositorio:
-
 ---
 
 ```markdown
@@ -152,15 +146,28 @@ Al ejecutar este flujo, podrás comparar visualmente cómo se reduce el peso fí
 
 ---
 
-### **🚀 Siguientes pasos para arrancar el proyecto:**
+## 🌐 Simulador Web en Vivo
 
-1.  Copia este bloque de Markdown y pégalo en tu archivo **`README.md`** en la carpeta local de tu repositorio.
-2.  Busca una imagen de prueba sencilla (en formato `.jpg` o `.png`), guárdala en tu carpeta con el nombre `tu_imagen.jpg` y añade este script de Python a tu cuaderno de Jupyter.
-3.  Sube los cambios a tu rama principal de GitHub:
-    ```bash
-    git add README.md
-    git commit -m "docs: completar el README con la teoría y código del método del codo"
-    git push origin main
-    ```
+Se desplego una aplicación web interactiva donde puedes dibujar tus propios datos y ver cómo funciona el algoritmo de K-medias paso a paso.
 
-📷 ¿Te gustaría que preparemos una estructura de visualización para que cuando ejecutes tu script, el cuaderno de Jupyter muestre la imagen original y la reducida lado a lado para contrastar la calidad?
+👉 <a href="https://josarta.github.io/Kmeans_PlayGround/" target="_blank" rel="noopener noreferrer"><strong>Entrar al K-Means Playground en Vivo</strong></a>
+
+---
+
+## 🧪 2. Análisis con Python y Scikit-Learn
+Para complementar la experiencia visual,  dispongo  un cuaderno de Jupyter que toma los datos que exportas de la web y los analiza utilizando librerías científicas de Python.
+
+
+### ¿Cómo ver y ejecutar el análisis?
+
+* <strong>Vista Rápida (Estática):</strong> Puedes ver el código y las gráficas generadas haciendo clic directamente en: <a href="notebooks/Analisis_kmeans.ipynb" target="_blank" rel="noopener noreferrer">Ver analisis_kmeans.ipynb</a>.
+* <strong>Ejecutar en la Nube (Interactivo):</strong> Haz clic en el siguiente botón para abrir el código en Google Colab, donde podrás correr el modelo en tiempo real e interactuar con el simulador embebido:
+
+<a href="https://colab.research.google.com/github/josarta/Kmeans_PlayGround/blob/main/analisis_kmeans.ipynb" target="_blank" rel="noopener noreferrer">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+</a>
+
+
+
+---
+
