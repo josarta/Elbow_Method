@@ -1,6 +1,3 @@
----
-
-```markdown
 # 🎨 Método del Codo (Elbow Method) aplicado al tratamiento de imágenes
 
 ## 📌 ¿Cuántos colores necesita realmente una imagen?
@@ -12,6 +9,37 @@ En este proyecto utilizaremos **K-Means** y el **Método del Codo (Elbow Method)
 La idea es sencilla:
 
 > 🖼️ **Imagen → Píxeles (RGB) → K-Means → Elbow Method → Número óptimo de colores → Imagen reducida**
+
+---
+## 🌐 Simulador Web en Vivo
+
+Se desplego una aplicación web interactiva donde puedes dibujar tus propios datos y ver cómo funciona el algoritmo de K-medias paso a paso.
+
+👉 <a href="https://josarta.github.io/Elbow_Method/" target="_blank" rel="noopener noreferrer"><strong>Entrar al K-Means Playground en Vivo</strong></a>
+
+---
+
+## 🧪 2. Análisis con Python y Scikit-Learn
+Para complementar la experiencia visual,  dispongo  un cuaderno de Jupyter que toma los datos que exportas de la web y los analiza utilizando librerías científicas de Python.
+
+
+### ¿Cómo ver y ejecutar el análisis?
+
+* <strong>Vista Rápida (Estática):</strong> Puedes ver el código y las gráficas generadas haciendo clic directamente en: <a href="notebooks/ElbowMethod.ipynb" target="_blank" rel="noopener noreferrer">Ver ElbowMethod.ipynb</a>.
+* <strong>Ejecutar en la Nube (Interactivo):</strong> Haz clic en el siguiente botón para abrir el código en Google Colab, donde podrás correr el modelo en tiempo real e interactuar con el simulador embebido:
+
+<a href="https://colab.research.google.com/josarta/Elbow_Method/blob/main/notebooks/ElbowMethod.ipynb" target="_blank" rel="noopener noreferrer">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+</a>
+
+### ¿Cómo ver y ejecutar el análisis V1?
+
+* <strong>Vista Rápida (Estática):</strong> Puedes ver el código y las gráficas generadas haciendo clic directamente en: <a href="notebooks/ElbowMethodV1.ipynb" target="_blank" rel="noopener noreferrer">Ver ElbowMethodV1.ipynb</a>.
+* <strong>Ejecutar en la Nube (Interactivo):</strong> Haz clic en el siguiente botón para abrir el código en Google Colab, donde podrás correr el modelo en tiempo real e interactuar con el simulador embebido:
+
+<a href="https://colab.research.google.com/josarta/Elbow_Method/blob/main/notebooks/ElbowMethodV1.ipynb" target="_blank" rel="noopener noreferrer">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
+</a>
 
 ---
 
@@ -142,32 +170,5 @@ Al ejecutar este flujo, podrás comparar visualmente cómo se reduce el peso fí
 ---
 
 *Proyecto desarrollado como parte de las prácticas de Aprendizaje No Supervisado.*
-```
 
 ---
-
-## 🌐 Simulador Web en Vivo
-
-Se desplego una aplicación web interactiva donde puedes dibujar tus propios datos y ver cómo funciona el algoritmo de K-medias paso a paso.
-
-👉 <a href="https://josarta.github.io/Kmeans_PlayGround/" target="_blank" rel="noopener noreferrer"><strong>Entrar al K-Means Playground en Vivo</strong></a>
-
----
-
-## 🧪 2. Análisis con Python y Scikit-Learn
-Para complementar la experiencia visual,  dispongo  un cuaderno de Jupyter que toma los datos que exportas de la web y los analiza utilizando librerías científicas de Python.
-
-
-### ¿Cómo ver y ejecutar el análisis?
-
-* <strong>Vista Rápida (Estática):</strong> Puedes ver el código y las gráficas generadas haciendo clic directamente en: <a href="notebooks/Analisis_kmeans.ipynb" target="_blank" rel="noopener noreferrer">Ver analisis_kmeans.ipynb</a>.
-* <strong>Ejecutar en la Nube (Interactivo):</strong> Haz clic en el siguiente botón para abrir el código en Google Colab, donde podrás correr el modelo en tiempo real e interactuar con el simulador embebido:
-
-<a href="https://colab.research.google.com/github/josarta/Kmeans_PlayGround/blob/main/analisis_kmeans.ipynb" target="_blank" rel="noopener noreferrer">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
-</a>
-
-
-
----
-
