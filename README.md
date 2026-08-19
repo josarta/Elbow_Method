@@ -32,7 +32,7 @@ Para complementar la experiencia visual,  dispongo  un cuaderno de Jupyter que t
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
 </a>
 
-### ¿Cómo ver y ejecutar el análisis V1?
+### Otro ejemplo de su aplicacion
 
 * <strong>Vista Rápida (Estática):</strong> Puedes ver el código y las gráficas generadas haciendo clic directamente en: <a href="notebooks/ElbowMethodV1.ipynb" target="_blank" rel="noopener noreferrer">Ver ElbowMethodV1.ipynb</a>.
 * <strong>Ejecutar en la Nube (Interactivo):</strong> Haz clic en el siguiente botón para abrir el código en Google Colab, donde podrás correr el modelo en tiempo real e interactuar con el simulador embebido:
