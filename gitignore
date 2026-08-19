@@ -1,0 +1,21 @@
+# Entornos virtuales
+.venv/
+env/
+venv/
+ENV/
+
+# Datos (Nunca subir a producción/repositorio)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Modelos, gráficos y caches
+__pycache__/
+*.pyc
+outputs/models/*
+!outputs/models/.gitkeep
+outputs/charts/*
+!outputs/charts/.gitkeep
+.ipynb_checkpoints/
+.DS_Store

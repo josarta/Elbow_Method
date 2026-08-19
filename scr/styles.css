@@ -1,0 +1,109 @@
+/* Custom styles extending Tailwind CSS for glassmorphism and cyberpunk theme */
+
+/* Plus Jakarta Sans fonts */
+body {
+    background-color: #0b0f19;
+    color: #f3f4f6;
+    overflow-x: hidden;
+}
+
+/* Glassmorphism panel styles */
+.glass-panel {
+    background: rgba(17, 22, 37, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-panel:hover {
+    border-color: rgba(184, 109, 193, 0.15);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* 2xs text size */
+.text-2xs {
+    font-size: 0.7rem;
+}
+
+/* Preset buttons style */
+.preset-btn {
+    position: relative;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.preset-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.preset-btn.active::after {
+    border-color: #e0115f;
+    box-shadow: 0 0 15px rgba(224, 17, 95, 0.3);
+}
+
+.preset-btn.active {
+    border-color: #e0115f;
+    background: rgba(224, 17, 95, 0.05);
+}
+
+/* Custom palette color blocks */
+.palette-block {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.palette-block:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.palette-block::before {
+    content: 'Copiar';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    opacity: 0;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.palette-block:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0b0f19;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b86dc1;
+}

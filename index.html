@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Inteligente de Colores - Método del Codo</title>
+    <!-- Tailwind CSS for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for the Elbow Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="scr/styles.css">
+</head>
+<body class="bg-[#0b0f19] text-gray-100 min-h-screen font-['Plus_Jakarta_Sans'] antialiased selection:bg-[#e0115f] selection:text-white">
+    <!-- Neon glow background accents -->
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#e0115f] opacity-10 blur-[150px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#ff8c00] opacity-10 blur-[150px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-4 py-8 max-w-7xl relative z-10">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <span class="px-3 py-1 text-xs font-semibold tracking-wider text-[#e0115f] uppercase bg-[#e0115f]/10 rounded-full border border-[#e0115f]/20">Aprendizaje No Supervisado</span>
+            <h1 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-[#e0115f] via-[#b86dc1] to-[#ff8c00] bg-clip-text text-transparent">
+                Análisis Inteligente de Colores
+            </h1>
+            <p class="mt-3 text-gray-400 max-w-2xl mx-auto text-base">
+                Sube tu propia imagen o utiliza nuestras imágenes preestablecidas para agrupar sus píxeles en el espacio RGB usando <strong>K-Means</strong> y determinar de forma matemática el número óptimo de colores con el <strong>Método del Codo (Elbow Method)</strong>.
+            </p>
+        </header>
+
+        <!-- Main Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Panel: Controls & Selection (4 columns) -->
+            <div class="lg:col-span-4 space-y-6">
+                <!-- Preset Images Section -->
+                <div class="glass-panel p-6 rounded-2xl border border-gray-800/60 bg-[#111625]/60 backdrop-blur-xl">
+                    <h2 class="text-lg font-bold mb-4 text-[#b86dc1] flex items-center gap-2">
+                        <span>🖼️</span> 1. Selecciona una Imagen
+                    </h2>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <button onclick="loadPreset('imagen1')" id="btn-preset-1" class="preset-btn relative overflow-hidden rounded-xl border border-gray-700/60 transition group active">
+                            <div class="aspect-square bg-gray-900 overflow-hidden">
+                                <img src="data/imagen1_reducido.jpg" alt="Imagen 1: Cyberpunk" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            </div>
+                            <div class="p-2 text-xs font-medium text-center bg-gray-950/80">Neon Cyberpunk</div>
+                        </button>
+                        
+                        <button onclick="loadPreset('imagen2')" id="btn-preset-2" class="preset-btn relative overflow-hidden rounded-xl border border-gray-700/60 transition group">
+                            <div class="aspect-square bg-gray-900 overflow-hidden">
+                                <img src="data/imagen2_reducido.jpg" alt="Imagen 2: Sunset Beach" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            </div>
+                            <div class="p-2 text-xs font-medium text-center bg-gray-950/80">Playa Atardecer</div>
+                        </button>
+                    </div>
+
+                    <!-- Custom Upload Option -->
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-gray-800"></div>
+                        </div>
+                        <div class="relative flex justify-center text-xs uppercase">
+                            <span class="bg-[#111625] px-2 text-gray-500 font-semibold">o sube la tuya</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="flex flex-col items-center justify-center w-full h-24 border-2 border-dashed border-gray-700 rounded-xl cursor-pointer hover:border-[#b86dc1]/50 bg-gray-950/40 hover:bg-gray-950/60 transition duration-150">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-6 h-6 text-gray-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                <p class="text-xs text-gray-400"><span class="font-bold">Haz clic para cargar</span> o arrastra y suelta</p>
+                            </div>
+                            <input id="image-upload" type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Parameters & Execution -->
+                <div class="glass-panel p-6 rounded-2xl border border-gray-800/60 bg-[#111625]/60 backdrop-blur-xl">
+                    <h2 class="text-lg font-bold mb-4 text-[#b86dc1] flex items-center gap-2">
+                        <span>⚙️</span> 2. Parámetros del Algoritmo
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span class="text-gray-400">Rango de K (Grupos):</span>
+                                <span class="text-white font-bold">K = 2 hasta 10</span>
+                            </div>
+                            <p class="text-2xs text-gray-500">Evaluaremos cada valor de K para graficar la inercia (SSE).</p>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span class="text-gray-400">Tamaño de Muestra:</span>
+                                <span class="text-white font-bold" id="sample-size-label">2,500 píxeles</span>
+                            </div>
+                            <p class="text-2xs text-gray-500">La imagen se redimensiona a 50x50 para un análisis veloz en tiempo real.</p>
+                        </div>
+
+                        <button onclick="runAnalysis()" id="btn-run" class="w-full mt-2 py-3 px-4 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-[#e0115f] to-[#ff8c00] hover:brightness-110 active:scale-[0.98] transition shadow-lg shadow-[#e0115f]/20 flex items-center justify-center gap-2">
+                            <span>⚡</span> Ejecutar Análisis Inteligente
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Results & Visualization (8 columns) -->
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Images comparison -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Original Image Card -->
+                    <div class="glass-panel p-4 rounded-2xl border border-gray-800/60 bg-[#111625]/60 backdrop-blur-xl flex flex-col">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Imagen Original</span>
+                            <span class="text-2xs px-2 py-0.5 rounded bg-gray-800 text-gray-300" id="orig-resolution">1024 x 1024</span>
+                        </div>
+                        <div class="aspect-square w-full rounded-xl overflow-hidden bg-gray-900 flex items-center justify-center border border-gray-800 relative">
+                            <img id="display-original" src="data/imagen1_reducido.jpg" class="w-full h-full object-cover">
+                            <!-- Invisible canvas for pixel extraction -->
+                            <canvas id="canvas-hidden" class="hidden"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Processed / Quantized Image Card -->
+                    <div class="glass-panel p-4 rounded-2xl border border-gray-800/60 bg-[#111625]/60 backdrop-blur-xl flex flex-col">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-[#ff8c00] uppercase tracking-wider">Imagen Reducida (Cuantizada)</span>
+                            <span class="text-2xs px-2 py-0.5 rounded bg-[#ff8c00]/10 text-[#ff8c00] border border-[#ff8c00]/20 font-bold" id="quantized-k-label">Cargando...</span>
+                        </div>
+                        <div class="aspect-square w-full rounded-xl overflow-hidden bg-gray-900 flex items-center justify-center border border-gray-800 relative">
+                            <!-- Loader overlay -->
+                            <div id="loader" class="absolute inset-0 bg-[#0b0f19]/90 backdrop-blur-sm flex flex-col items-center justify-center opacity-0 pointer-events-none transition duration-300">
+                                <div class="w-12 h-12 border-4 border-t-[#e0115f] border-r-[#b86dc1] border-b-[#ff8c00] border-l-transparent rounded-full animate-spin"></div>
+                                <p class="mt-4 text-xs font-bold text-gray-300" id="loader-text">Analizando píxeles...</p>
+                            </div>
+                            <!-- Live updated canvas of quantized image -->
+                            <canvas id="canvas-quantized" class="w-full h-full object-cover rounded-xl"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Color Palette Section -->
+                <div class="glass-panel p-6 rounded-2xl border border-gray-800/60 bg-[#111625]/60 backdrop-blur-xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span>🎨</span> Paleta de Colores Óptima Extraída
+                        </h2>
+                        <span class="text-2xs text-gray-400">Haz clic en un color para copiar su código HEX</span>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-4 items-stretch justify-center" id="palette-container">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Elbow Method Visualization -->
+                <div class="glass-panel p-6 rounded-2xl border border-gray-800/60 bg-[#111625]/60 backdrop-blur-xl">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
+                        <div>
+                            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                <span>📉</span> Gráfico del Método del Codo
+                            </h2>
+                            <p class="text-xs text-gray-400">Inercia intra-clúster (Suma de Errores Cuadráticos - SSE) por cada número de colores (K).</p>
+                        </div>
+                        <div class="px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold" id="optimal-k-banner">
+                            K Óptimo Sugerido: <span id="opt-k-val" class="font-extrabold text-base">...</span>
+                        </div>
+                    </div>
+                    <div class="relative w-full h-[320px] bg-gray-950/40 rounded-xl p-4 border border-gray-800/40">
+                        <canvas id="chart-elbow"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanation Footer -->
+        <footer class="mt-12 pt-8 border-t border-gray-800 text-center text-xs text-gray-500 space-y-2">
+            <p>© 2026 Curso de Aprendizaje No Supervisado. Diseñado con fines didácticos y creativos.</p>
+            <p>Utiliza K-Means para la agrupación de píxeles en coordenadas tridimensionales de color (R, G, B) [4, 5].</p>
+        </footer>
+    </div>
+
+    <!-- Alert for copy notification -->
+    <div id="copy-toast" class="fixed bottom-6 right-6 px-4 py-2 bg-gray-900 border border-emerald-500/30 text-emerald-400 rounded-lg text-xs font-semibold opacity-0 translate-y-2 pointer-events-none transition duration-300 flex items-center gap-2 z-50 shadow-lg">
+        <span>✓</span> ¡Color HEX copiado al portapapeles!
+    </div>
+
+    <script src="scr/script.js"></script>
+</body>
+</html>
